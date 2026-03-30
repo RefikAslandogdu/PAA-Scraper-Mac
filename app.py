@@ -153,5 +153,5 @@ def _create_excel(query, questions):
 
 
 if __name__ == "__main__":
-    print("Sunucu başlatılıyor: http://localhost:5000")
-    app.run(debug=False, port=5000)
+    print("Sunucu başlatılıyor: http://localhost:8080")
+    app.run(debug=False, port=8080)

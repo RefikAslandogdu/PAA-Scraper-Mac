@@ -51,12 +51,12 @@ source .venv/bin/activate
 
 # --- Tarayıcıyı aç ve sunucuyu başlat ---
 echo ""
-echo "Sunucu başlatılıyor: http://localhost:5000"
+echo "Sunucu başlatılıyor: http://localhost:8080"
 echo "Kapatmak için bu pencereyi kapatın veya Ctrl+C basın."
 echo ""
 
 # 1.5 saniye sonra tarayıcıyı aç (arka planda)
-(sleep 1.5 && open "http://localhost:5000") &
+(sleep 1.5 && open "http://localhost:8080") &
 
 # Flask sunucusunu başlat
 $PY app.py
