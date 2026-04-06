@@ -2,21 +2,19 @@
   Google PAA Scraper - Mac Kurulum
 =============================================
 
-1. Bu klasörü istediğin yere koy (örn: Masaüstü)
+1. ZIP'i indir ve ac
 
-2. "Hasar görmüş" hatası alırsan Terminal'i aç ve şunu yaz:
+2. Terminal'i ac (Cmd + Space > "Terminal" yaz > Enter)
 
-   xattr -cr ~/Desktop/PAA\ Scraper\ Mac/
+3. Bu komutu kopyala yapistir:
 
-   (Klasörü başka yere koyduysan yolu ona göre değiştir)
+   cd ~/Downloads/PAA-Scraper-Mac-main && xattr -cr . && chmod +x "PAA Scraper.command" && bash "PAA Scraper.command"
 
-3. "PAA Scraper.command" dosyasına çift tıkla
+4. Ilk calistirmada otomatik kurulum yapar (1-2 dakika):
+   - Python bagimliklarini yukler
+   - Chromium tarayici indirir
 
-4. İlk açılışta otomatik kurulum yapar (1-2 dakika):
-   - Python bağımlılıklarını yükler
-   - Chromium tarayıcı indirir
+5. Tarayici otomatik acilir, kullanmaya basla!
 
-5. Tarayıcı otomatik açılır, kullanmaya başla!
-
-NOT: Python 3 gereklidir. macOS 12+ sürümlerde zaten yüklüdür.
+NOT: Python 3 gereklidir. macOS 12+ surumlerinde zaten yukludur.
      Yoksa: https://www.python.org/downloads/
