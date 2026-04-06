@@ -18,12 +18,8 @@
       color: #202124;
     }
 
-    /* ---- Header ---- */
     .logo {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
+      font-size: 28px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px;
     }
     .logo span:nth-child(1) { color: #4285F4; }
     .logo span:nth-child(2) { color: #EA4335; }
@@ -32,10 +28,32 @@
     .logo span:nth-child(5) { color: #34A853; }
     .logo span:nth-child(6) { color: #EA4335; }
 
-    .subtitle {
+    .subtitle { font-size: 14px; color: #5f6368; margin-bottom: 28px; }
+
+    /* ---- Mode tabs ---- */
+    .mode-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .mode-tab {
+      padding: 10px 24px;
       font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: #fff;
       color: #5f6368;
-      margin-bottom: 36px;
+      transition: all .15s;
+    }
+    .mode-tab:hover { background: #f8f9fa; }
+    .mode-tab.active {
+      background: #1a73e8;
+      color: #fff;
     }
 
     /* ---- Search box ---- */
@@ -51,165 +69,158 @@
       gap: 8px;
       transition: box-shadow .2s;
     }
-    .search-card:focus-within {
-      box-shadow: 0 4px 16px rgba(66,133,244,0.2);
-    }
+    .search-card:focus-within { box-shadow: 0 4px 16px rgba(66,133,244,0.2); }
 
     #queryInput {
-      flex: 1;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      color: #202124;
-      background: transparent;
+      flex: 1; border: none; outline: none;
+      font-size: 16px; color: #202124; background: transparent;
     }
     #queryInput::placeholder { color: #bdc1c6; }
 
-    #searchBtn {
-      background: #1a73e8;
-      color: #fff;
-      border: none;
-      border-radius: 18px;
-      padding: 10px 22px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .15s;
+    .btn-primary {
+      background: #1a73e8; color: #fff; border: none; border-radius: 18px;
+      padding: 10px 22px; font-size: 14px; font-weight: 600;
+      cursor: pointer; white-space: nowrap; transition: background .15s;
     }
-    #searchBtn:hover { background: #1557b0; }
-    #searchBtn:disabled { background: #bdc1c6; cursor: not-allowed; }
+    .btn-primary:hover { background: #1557b0; }
+    .btn-primary:disabled { background: #bdc1c6; cursor: not-allowed; }
 
-    #numSelect {
-      border: 1.5px solid #dadce0;
-      border-radius: 12px;
-      padding: 8px 10px;
-      font-size: 14px;
-      color: #202124;
-      background: #fff;
-      outline: none;
-      cursor: pointer;
+    /* ---- Bulk mode ---- */
+    #bulkSection {
+      display: none;
+      width: 100%; max-width: 640px;
+      flex-direction: column; gap: 12px;
     }
-    #numSelect:focus { border-color: #1a73e8; }
+    #bulkSection.active { display: flex; }
+    #singleSection.hidden { display: none; }
+
+    #bulkInput {
+      width: 100%; min-height: 160px; border: 1.5px solid #dadce0;
+      border-radius: 16px; padding: 16px; font-size: 14px; font-family: inherit;
+      color: #202124; outline: none; resize: vertical;
+      background: #fff;
+    }
+    #bulkInput:focus { border-color: #1a73e8; }
+    #bulkInput::placeholder { color: #bdc1c6; }
+
+    .bulk-footer {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .bulk-count { font-size: 13px; color: #5f6368; }
 
     /* ---- Loader ---- */
     #loader {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-      margin-top: 48px;
+      display: none; flex-direction: column; align-items: center;
+      gap: 14px; margin-top: 48px;
     }
     .spinner {
-      width: 42px; height: 42px;
-      border: 4px solid #e8eaed;
-      border-top-color: #1a73e8;
-      border-radius: 50%;
+      width: 42px; height: 42px; border: 4px solid #e8eaed;
+      border-top-color: #1a73e8; border-radius: 50%;
       animation: spin .8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     #loader p { color: #5f6368; font-size: 14px; }
 
+    /* ---- Progress bar ---- */
+    .progress-bar {
+      width: 300px; height: 6px; background: #e8eaed;
+      border-radius: 3px; overflow: hidden; margin-top: 4px;
+    }
+    .progress-fill {
+      height: 100%; background: #1a73e8; border-radius: 3px;
+      transition: width .3s;
+    }
+
     /* ---- Error ---- */
     #errorBox {
-      display: none;
-      margin-top: 32px;
-      background: #fce8e6;
-      border: 1px solid #f28b82;
-      border-radius: 12px;
-      padding: 14px 20px;
-      color: #c5221f;
-      font-size: 14px;
-      max-width: 640px;
-      width: 100%;
+      display: none; margin-top: 32px; background: #fce8e6;
+      border: 1px solid #f28b82; border-radius: 12px; padding: 14px 20px;
+      color: #c5221f; font-size: 14px; max-width: 640px; width: 100%;
       text-align: center;
     }
 
     /* ---- Results ---- */
     #resultsSection {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 700px;
-      margin-top: 40px;
-      gap: 16px;
+      display: none; flex-direction: column; align-items: center;
+      width: 100%; max-width: 700px; margin-top: 40px; gap: 16px;
     }
-
     .results-header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
     }
-    .results-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #202124;
-    }
+    .results-title { font-size: 16px; font-weight: 600; color: #202124; }
     .query-badge {
-      background: #e8f0fe;
-      color: #1a73e8;
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 13px;
-      font-weight: 500;
+      background: #e8f0fe; color: #1a73e8; border-radius: 20px;
+      padding: 4px 14px; font-size: 13px; font-weight: 500;
     }
+    .total-count { font-size: 13px; color: #5f6368; margin-top: 4px; }
 
     .question-list {
-      width: 100%;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.10);
-      overflow: hidden;
+      width: 100%; background: #fff; border-radius: 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.10); overflow: hidden;
     }
 
+    /* ---- Question items (tree) ---- */
     .question-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px 20px;
-      border-bottom: 1px solid #f1f3f4;
-      transition: background .15s;
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 20px; border-bottom: 1px solid #f1f3f4;
+      cursor: pointer; transition: background .15s; user-select: none;
     }
     .question-item:last-child { border-bottom: none; }
     .question-item:hover { background: #f8f9fa; }
+    .question-item .expand-icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      transition: transform .2s; color: #5f6368;
+    }
+    .question-item.expanded .expand-icon { transform: rotate(90deg); }
+    .question-item.loading .expand-icon { animation: spin .8s linear infinite; color: #1a73e8; }
 
     .q-number {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: #1a73e8;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 1px;
+      width: 26px; height: 26px; border-radius: 50%; background: #1a73e8;
+      color: #fff; font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .q-text {
-      font-size: 15px;
-      color: #202124;
-      line-height: 1.5;
+    .q-text { font-size: 15px; color: #202124; line-height: 1.4; flex: 1; }
+
+    .sub-questions { display: none; padding: 0; }
+    .sub-questions.open { display: block; }
+    .sub-questions .question-item { padding-left: 56px; background: #f8f9fa; }
+    .sub-questions .question-item:hover { background: #eef1f3; }
+    .sub-questions .q-number { background: #5f6368; width: 22px; height: 22px; font-size: 10px; }
+    .sub-questions .sub-questions .question-item { padding-left: 88px; background: #f1f3f4; }
+    .sub-questions .sub-questions .question-item:hover { background: #e8eaed; }
+    .sub-questions .sub-questions .q-number { background: #9aa0a6; }
+
+    /* ---- Bulk results: query groups ---- */
+    .query-group {
+      margin-bottom: 4px;
+    }
+    .query-group-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px; background: #e8f0fe;
+      font-weight: 600; font-size: 14px; color: #1a73e8;
+      cursor: pointer; user-select: none;
+      border-bottom: 1px solid #dadce0;
+    }
+    .query-group-header:hover { background: #d2e3fc; }
+    .query-group-header .expand-icon {
+      width: 18px; height: 18px; flex-shrink: 0;
+      transition: transform .2s; color: #1a73e8;
+    }
+    .query-group-header.expanded .expand-icon { transform: rotate(90deg); }
+    .query-group-body { display: none; }
+    .query-group-body.open { display: block; }
+    .query-group-count {
+      font-size: 12px; font-weight: 400; color: #5f6368; margin-left: auto;
     }
 
     /* ---- Download button ---- */
-    #downloadBtn {
-      background: #34a853;
-      color: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 12px 28px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .btn-download {
+      background: #34a853; color: #fff; border: none; border-radius: 20px;
+      padding: 12px 28px; font-size: 14px; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; gap: 8px;
       transition: background .15s;
     }
-    #downloadBtn:hover { background: #1e8e3e; }
+    .btn-download:hover { background: #1e8e3e; }
 
     .icon-excel {
       width: 18px; height: 18px;
@@ -224,117 +235,292 @@
   </div>
   <p class="subtitle">People Also Ask — Otomatik Çekici</p>
 
-  <div class="search-card">
-    <input
-      id="queryInput"
-      type="text"
-      placeholder="Sorgunuzu girin... (örn: seo nedir)"
-      autocomplete="off"
-    />
-    <select id="numSelect" title="Soru sayısı">
-      <option value="5">5 soru</option>
-      <option value="10" selected>10 soru</option>
-      <option value="15">15 soru</option>
-      <option value="20">20 soru</option>
-    </select>
-    <button id="searchBtn" onclick="startSearch()">Ara</button>
+  <!-- Mode tabs -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="switchMode('single')">Tekli Sorgu</button>
+    <button class="mode-tab" onclick="switchMode('bulk')">Toplu Sorgu</button>
+  </div>
+
+  <!-- Single mode -->
+  <div id="singleSection">
+    <div class="search-card">
+      <input id="queryInput" type="text" placeholder="Sorgunuzu girin... (örn: seo nedir)" autocomplete="off" />
+      <button class="btn-primary" id="searchBtn" onclick="startSearch()">Ara</button>
+    </div>
+  </div>
+
+  <!-- Bulk mode -->
+  <div id="bulkSection">
+    <textarea id="bulkInput" placeholder="Her satira bir sorgu yazin...&#10;&#10;Ornek:&#10;seo nedir&#10;dijital pazarlama&#10;backlink nedir&#10;site hizi optimizasyonu"></textarea>
+    <div class="bulk-footer">
+      <span class="bulk-count" id="bulkCount">0 sorgu</span>
+      <button class="btn-primary" id="bulkBtn" onclick="startBulkSearch()">Toplu Ara</button>
+    </div>
   </div>
 
   <div id="loader">
     <div class="spinner"></div>
-    <p>Google'dan veriler çekiliyor, lütfen bekleyin...</p>
+    <p id="loaderText">Google'dan veriler çekiliyor, lütfen bekleyin...</p>
+    <div class="progress-bar" id="progressBar" style="display:none;">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
   </div>
 
   <div id="errorBox"></div>
 
   <div id="resultsSection">
     <div class="results-header">
-      <span class="results-title">People Also Ask Soruları</span>
+      <div>
+        <span class="results-title" id="resultsTitle">People Also Ask Soruları</span>
+        <div class="total-count" id="totalCount"></div>
+      </div>
       <span class="query-badge" id="queryBadge"></span>
     </div>
     <div class="question-list" id="questionList"></div>
-    <button id="downloadBtn" onclick="downloadExcel()">
+    <button class="btn-download" id="downloadBtn" onclick="downloadExcel()">
       <span class="icon-excel"></span>
-      Excel İndir
+      Excel Indir
     </button>
   </div>
 
   <script>
     let currentFilename = null;
+    let allQuestions = [];
+    let currentMode = 'single';
 
-    const queryInput   = document.getElementById('queryInput');
-    const searchBtn    = document.getElementById('searchBtn');
-    const loader       = document.getElementById('loader');
-    const errorBox     = document.getElementById('errorBox');
+    const SVG_ARROW = `<svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+
+    // --- DOM refs ---
+    const queryInput     = document.getElementById('queryInput');
+    const searchBtn      = document.getElementById('searchBtn');
+    const bulkInput      = document.getElementById('bulkInput');
+    const bulkBtn        = document.getElementById('bulkBtn');
+    const bulkCount      = document.getElementById('bulkCount');
+    const loader         = document.getElementById('loader');
+    const loaderText     = document.getElementById('loaderText');
+    const progressBar    = document.getElementById('progressBar');
+    const progressFill   = document.getElementById('progressFill');
+    const errorBox       = document.getElementById('errorBox');
     const resultsSection = document.getElementById('resultsSection');
-    const questionList = document.getElementById('questionList');
-    const queryBadge   = document.getElementById('queryBadge');
+    const resultsTitle   = document.getElementById('resultsTitle');
+    const questionList   = document.getElementById('questionList');
+    const queryBadge     = document.getElementById('queryBadge');
+    const totalCount     = document.getElementById('totalCount');
 
-    queryInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') startSearch();
-    });
+    queryInput.addEventListener('keydown', e => { if (e.key === 'Enter') startSearch(); });
+    bulkInput.addEventListener('input', updateBulkCount);
 
-    function showLoader(visible) {
+    function updateBulkCount() {
+      const lines = bulkInput.value.split('\n').filter(l => l.trim());
+      bulkCount.textContent = `${lines.length} sorgu`;
+    }
+
+    function switchMode(mode) {
+      currentMode = mode;
+      document.querySelectorAll('.mode-tab').forEach((t, i) => {
+        t.classList.toggle('active', (i === 0 && mode === 'single') || (i === 1 && mode === 'bulk'));
+      });
+      document.getElementById('singleSection').classList.toggle('hidden', mode === 'bulk');
+      document.getElementById('bulkSection').classList.toggle('active', mode === 'bulk');
+      hideError();
+      showResults(false);
+    }
+
+    function showLoader(visible, text) {
       loader.style.display = visible ? 'flex' : 'none';
+      if (text) loaderText.textContent = text;
     }
-    function showError(msg) {
-      errorBox.textContent = msg;
-      errorBox.style.display = 'block';
+    function showProgress(current, total) {
+      progressBar.style.display = 'block';
+      progressFill.style.width = `${Math.round((current / total) * 100)}%`;
     }
-    function hideError() {
-      errorBox.style.display = 'none';
+    function hideProgress() { progressBar.style.display = 'none'; progressFill.style.width = '0%'; }
+    function showError(msg) { errorBox.textContent = msg; errorBox.style.display = 'block'; }
+    function hideError() { errorBox.style.display = 'none'; }
+    function showResults(visible) { resultsSection.style.display = visible ? 'flex' : 'none'; }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
-    function showResults(visible) {
-      resultsSection.style.display = visible ? 'flex' : 'none';
+
+    // ==================== SINGLE MODE ====================
+
+    function createQuestionItem(text, number) {
+      const item = document.createElement('div');
+      item.className = 'question-item';
+      item.innerHTML = `${SVG_ARROW}<div class="q-number">${number}</div><div class="q-text">${escapeHtml(text)}</div>`;
+
+      const subContainer = document.createElement('div');
+      subContainer.className = 'sub-questions';
+
+      item.addEventListener('click', e => { e.stopPropagation(); expandQuestion(item, subContainer, text); });
+      return { item, subContainer };
+    }
+
+    async function expandQuestion(itemEl, subContainer, question) {
+      if (itemEl.classList.contains('expanded')) {
+        itemEl.classList.remove('expanded');
+        subContainer.classList.remove('open');
+        return;
+      }
+      if (subContainer.children.length > 0) {
+        itemEl.classList.add('expanded');
+        subContainer.classList.add('open');
+        return;
+      }
+      itemEl.classList.add('loading');
+      try {
+        const res = await fetch('/search', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: question, num_questions: 5 }),
+        });
+        const data = await res.json();
+        if (data.questions && data.questions.length > 0) {
+          data.questions.forEach((q, i) => {
+            if (!allQuestions.includes(q)) allQuestions.push(q);
+            const { item: subItem, subContainer: subSub } = createQuestionItem(q, i + 1);
+            subContainer.appendChild(subItem);
+            subContainer.appendChild(subSub);
+          });
+          itemEl.classList.add('expanded');
+          subContainer.classList.add('open');
+          totalCount.textContent = `Toplam: ${allQuestions.length} soru`;
+        }
+      } catch (err) {}
+      finally { itemEl.classList.remove('loading'); }
     }
 
     async function startSearch() {
       const query = queryInput.value.trim();
-      if (!query) { showError('Lütfen bir sorgu girin.'); return; }
+      if (!query) { showError('Lutfen bir sorgu girin.'); return; }
 
-      // Reset UI
-      hideError();
-      showResults(false);
-      showLoader(true);
+      hideError(); showResults(false);
+      showLoader(true, "Google'dan veriler cekiliyor..."); hideProgress();
       searchBtn.disabled = true;
-      currentFilename = null;
+      currentFilename = null; allQuestions = [];
 
       try {
-        const num_questions = parseInt(document.getElementById('numSelect').value);
         const res = await fetch('/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query, num_questions }),
+          body: JSON.stringify({ query, num_questions: 5 }),
         });
         const data = await res.json();
+        if (!res.ok || data.error) { showError(data.error); return; }
 
-        if (!res.ok || data.error) {
-          showError(data.error || 'Beklenmedik bir hata oluştu.');
-          return;
-        }
-
-        // Render questions
         questionList.innerHTML = '';
+        allQuestions = [...data.questions];
         data.questions.forEach((q, i) => {
-          const item = document.createElement('div');
-          item.className = 'question-item';
-          item.innerHTML = `
-            <div class="q-number">${i + 1}</div>
-            <div class="q-text">${escapeHtml(q)}</div>
-          `;
+          const { item, subContainer } = createQuestionItem(q, i + 1);
           questionList.appendChild(item);
+          questionList.appendChild(subContainer);
         });
 
         queryBadge.textContent = query;
+        resultsTitle.textContent = 'People Also Ask Sorulari';
         currentFilename = data.filename;
+        totalCount.textContent = `Toplam: ${allQuestions.length} soru`;
         showResults(true);
+      } catch (err) { showError('Sunucuya baglanilamadi.'); }
+      finally { showLoader(false); searchBtn.disabled = false; }
+    }
 
-      } catch (err) {
-        showError('Sunucuya bağlanılamadı. app.py çalışıyor mu?');
-      } finally {
-        showLoader(false);
-        searchBtn.disabled = false;
+    // ==================== BULK MODE ====================
+
+    async function startBulkSearch() {
+      const lines = bulkInput.value.split('\n').map(l => l.trim()).filter(l => l);
+      if (lines.length === 0) { showError('Lutfen en az bir sorgu girin.'); return; }
+
+      hideError(); showResults(false);
+      showLoader(true, `Toplu arama: 0 / ${lines.length}`);
+      showProgress(0, lines.length);
+      bulkBtn.disabled = true;
+      currentFilename = null; allQuestions = [];
+
+      const bulkResults = {};
+      let completed = 0;
+
+      for (const query of lines) {
+        loaderText.textContent = `"${query}" aranıyor... (${completed + 1} / ${lines.length})`;
+        showProgress(completed, lines.length);
+
+        try {
+          const res = await fetch('/search', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query, num_questions: 5 }),
+          });
+          const data = await res.json();
+          bulkResults[query] = (data.questions && data.questions.length > 0) ? data.questions : [];
+        } catch (err) {
+          bulkResults[query] = [];
+        }
+
+        completed++;
+        showProgress(completed, lines.length);
       }
+
+      // Render bulk results
+      questionList.innerHTML = '';
+      let globalNum = 0;
+
+      for (const [query, questions] of Object.entries(bulkResults)) {
+        const group = document.createElement('div');
+        group.className = 'query-group';
+
+        const header = document.createElement('div');
+        header.className = 'query-group-header expanded';
+        header.innerHTML = `${SVG_ARROW}<span>${escapeHtml(query)}</span><span class="query-group-count">${questions.length} soru</span>`;
+
+        const body = document.createElement('div');
+        body.className = 'query-group-body open';
+
+        header.addEventListener('click', () => {
+          header.classList.toggle('expanded');
+          body.classList.toggle('open');
+        });
+
+        questions.forEach((q, i) => {
+          globalNum++;
+          allQuestions.push(q);
+          const { item, subContainer } = createQuestionItem(q, i + 1);
+          body.appendChild(item);
+          body.appendChild(subContainer);
+        });
+
+        if (questions.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'question-item';
+          empty.style.cursor = 'default';
+          empty.style.color = '#9aa0a6';
+          empty.innerHTML = `<div class="q-text" style="color:#9aa0a6;">Sonuc bulunamadi</div>`;
+          body.appendChild(empty);
+        }
+
+        group.appendChild(header);
+        group.appendChild(body);
+        questionList.appendChild(group);
+      }
+
+      // Excel olustur
+      try {
+        const res = await fetch('/bulk-search-excel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ results: bulkResults }),
+        });
+        const data = await res.json();
+        if (data.filename) currentFilename = data.filename;
+      } catch (err) {}
+
+      queryBadge.textContent = `${lines.length} sorgu`;
+      resultsTitle.textContent = 'Toplu Sorgu Sonuclari';
+      totalCount.textContent = `Toplam: ${allQuestions.length} soru`;
+      showResults(true);
+      showLoader(false);
+      hideProgress();
+      bulkBtn.disabled = false;
     }
 
     function downloadExcel() {
@@ -345,14 +531,6 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-    }
-
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
     }
   </script>
 </body>
