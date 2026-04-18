@@ -163,14 +163,30 @@
     .question-item {
       display: flex; align-items: center; gap: 12px;
       padding: 14px 20px; border-bottom: 1px solid #f1f3f4;
-      cursor: pointer; transition: background .15s; user-select: none;
+      transition: background .15s;
     }
     .question-item:last-child { border-bottom: none; }
     .question-item:hover { background: #f8f9fa; }
     .question-item .expand-icon {
       width: 20px; height: 20px; flex-shrink: 0;
       transition: transform .2s; color: #5f6368;
+      cursor: pointer;
     }
+    .q-text {
+      user-select: text;
+      cursor: text;
+    }
+    .copy-btn {
+      opacity: 0;
+      background: none; border: none;
+      color: #5f6368; cursor: pointer;
+      padding: 4px 8px; border-radius: 6px;
+      font-size: 12px; transition: all .15s;
+      flex-shrink: 0;
+    }
+    .question-item:hover .copy-btn { opacity: 1; }
+    .copy-btn:hover { background: #e8f0fe; color: #1a73e8; }
+    .copy-btn.copied { color: #34a853; opacity: 1; }
     .question-item.expanded .expand-icon { transform: rotate(90deg); }
     .question-item.loading .expand-icon { animation: spin .8s linear infinite; color: #1a73e8; }
 
@@ -179,7 +195,10 @@
       color: #fff; font-size: 12px; font-weight: 700;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .q-text { font-size: 15px; color: #202124; line-height: 1.4; flex: 1; }
+    .q-text {
+      font-size: 15px; color: #202124; line-height: 1.4; flex: 1;
+      user-select: text; cursor: text;
+    }
 
     .sub-questions { display: none; padding: 0; }
     .sub-questions.open { display: block; }
@@ -348,12 +367,38 @@
     function createQuestionItem(text, number) {
       const item = document.createElement('div');
       item.className = 'question-item';
-      item.innerHTML = `${SVG_ARROW}<div class="q-number">${number}</div><div class="q-text">${escapeHtml(text)}</div>`;
+      item.innerHTML = `
+        ${SVG_ARROW}
+        <div class="q-number">${number}</div>
+        <div class="q-text">${escapeHtml(text)}</div>
+        <button class="copy-btn" title="Kopyala">Kopyala</button>
+      `;
 
       const subContainer = document.createElement('div');
       subContainer.className = 'sub-questions';
 
-      item.addEventListener('click', e => { e.stopPropagation(); expandQuestion(item, subContainer, text); });
+      // Sadece ok ikonuna tiklaninca genisletme
+      const arrowIcon = item.querySelector('.expand-icon');
+      arrowIcon.addEventListener('click', e => {
+        e.stopPropagation();
+        expandQuestion(item, subContainer, text);
+      });
+
+      // Kopyala butonu
+      const copyBtn = item.querySelector('.copy-btn');
+      copyBtn.addEventListener('click', async e => {
+        e.stopPropagation();
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = 'Kopyalandi!';
+          copyBtn.classList.add('copied');
+          setTimeout(() => {
+            copyBtn.textContent = 'Kopyala';
+            copyBtn.classList.remove('copied');
+          }, 1500);
+        } catch (err) {}
+      });
+
       return { item, subContainer };
     }
 
